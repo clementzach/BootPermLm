@@ -3,7 +3,7 @@
 #' @param y The response variables (as a matrix)
 #' @param x The predictor variables (as a matrix). Note that if an intercept term is desired, you should include a column of 1s.
 #' @param alpha the level of the confidence interval. Default is 0.05
-#' @param B The number of permutations to conduct. Default is 1000.
+#' @param B The number of bootstrapped samples to conduct. Default is 1000.
 #' 
 #' @return A table with coefficient estimates and confidence intervals
 #' 
@@ -41,13 +41,13 @@ bootstrap_from_matrix <- function(y, x, alpha = 0.05,  B = 1000) {
   
   dist <- bootstrap_distribution(0:(nrow(design_matrix)-1), design_matrix, B)
   
-  ci <- sapply(1:(ncol(x)+ 1), function(x){
+  ci <- sapply(1:(ncol(x)), function(x){
     quantile(dist[,x], prob = c(alpha/2, 1-alpha/2))
   }) |> 
     t()
   
   cbind(observed_vals, ci) |> 
     `colnames<-`(c("Observed Value", colnames(ci))) |>
-    `rownames<-`(c("(Intercept)", colnames(x)))
+    `rownames<-`(colnames(x))
   
 }

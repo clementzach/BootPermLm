@@ -39,7 +39,7 @@ permutation_test_matrix <- function(y, x, B = 1000) {
   
   perms <- permutation_distribution(0:(nrow(design_matrix)-1), design_matrix, B)
   
-  p_vals <- sapply(1:(ncol(x)+ 1), function(x){
+  p_vals <- sapply(1:(ncol(x)), function(x){
     mean(
       (abs(observed_vals[x]) < perms[,x]) | ## 2 sided 
            (-abs(observed_vals[x]) > perms[,x])
@@ -48,6 +48,6 @@ permutation_test_matrix <- function(y, x, B = 1000) {
     
   cbind(observed_vals, p_vals) |> 
     `colnames<-`(c("Observed Value", "P")) |>
-    `rownames<-`(c("(Intercept)", colnames(x)))
+    `rownames<-`(colnames(x))
 
 }
