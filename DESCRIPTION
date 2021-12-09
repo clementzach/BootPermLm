@@ -1,0 +1,12 @@
+Package: BootPermLm
+Type: Package
+Title: Computes P-Values and Confidence Intervals Using Simulation
+Version: 1.0
+Date: 2021-12-09
+Author: Zachary Clement
+Maintainer: Zachary Clement <clementzach@icloud.com>
+Description: Uses boostrapping to get confidence intervals for regression coefficients. Uses permutation tests to get p-values for regression coefficients.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.7)
+LinkingTo: Rcpp, RcppEigen
+RoxygenNote: 7.1.2
