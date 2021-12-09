@@ -1,7 +1,7 @@
 #' Permutation Test Regression Coefficients
 #' 
-#' @param y The response variables
-#' @param x The predictor variables 
+#' @param y The response variables (As a matrix)
+#' @param x The predictor variables  (As a matrix)
 #' @param B The number of permutations to conduct. Default is 1000.
 #' 
 #' @return A table with coefficient estimates and permutation p-values.
@@ -22,12 +22,12 @@
 #' x <- cbind(x1, x2, x3)
 #' 
 #' 
-#' permutation_test_lm(y, x)
+#' permutation_test_matrix(y, x)
 #'
 #'
 #'
 #' @export
-permutation_test_lm <- function(y, x, B = 1000) {
+permutation_test_matrix <- function(y, x, B = 1000) {
   x <- as.matrix(x)
   
   if(is.null(colnames(x))){

@@ -1,7 +1,7 @@
-#' Bootstrap Standard Errors for Regression Coefficients
+#' Bootstrap Confidence Intervals for Regression Coefficients
 #' 
-#' @param y The response variables
-#' @param x The predictor variables 
+#' @param y The response variables (as a matrix)
+#' @param x The predictor variables (as a matrix) 
 #' @param alpha the level of the confidence interval. Default is 0.05
 #' @param B The number of permutations to conduct. Default is 1000.
 #' 
@@ -24,12 +24,12 @@
 #' x <- cbind(x1, x2, x3)
 #' 
 #' 
-#' bootstrap_test_lm(y, x)
+#' bootstrap_test_matrix(y, x)
 #'
 #'
 #'
 #' @export
-bootstrap_test_lm <- function(y, x, alpha = 0.05,  B = 1000) {
+bootstrap_test_matrix <- function(y, x, alpha = 0.05,  B = 1000) {
   x <- as.matrix(x)
   
   if(is.null(colnames(x))){
