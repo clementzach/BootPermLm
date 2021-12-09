@@ -1,7 +1,7 @@
 #' Permutation Test Regression Coefficients
 #' 
 #' @param y The response variables (As a matrix)
-#' @param x The predictor variables  (As a matrix)
+#' @param x The predictor variables  (As a matrix). Note that if an intercept term is desired, this matrix should contain a column of 1s
 #' @param B The number of permutations to conduct. Default is 1000.
 #' 
 #' @return A table with coefficient estimates and permutation p-values.
@@ -19,7 +19,7 @@
 #' x2 <- rnorm(100) + x1
 #' x3 <- rnorm(100)
 #' y <- rnorm(100) + x1 + 2*x2
-#' x <- cbind(x1, x2, x3)
+#' x <- cbind("(Intercept)" = 1, x1, x2, x3)
 #' 
 #' 
 #' permutation_test_matrix(y, x)
@@ -31,9 +31,9 @@ permutation_test_matrix <- function(y, x, B = 1000) {
   x <- as.matrix(x)
   
   if(is.null(colnames(x))){
-    colnames(x) <- paste0("V", 1:ncol(x))
+    colnames(x) <- paste0("V", 0:(ncol(x)-1))
   }
-  design_matrix <- cbind(y, 1, x) |> as.matrix()
+  design_matrix <- cbind(y,  x) |> as.matrix()
   
   observed_vals <- get_betas(design_matrix)
   
