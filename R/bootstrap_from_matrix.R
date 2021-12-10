@@ -42,7 +42,7 @@ bootstrap_from_matrix <- function(y, x, alpha = 0.05,  B = 1000) {
   dist <- bootstrap_distribution(0:(nrow(design_matrix)-1), design_matrix, B)
   
   ci <- sapply(1:(ncol(x)), function(x){
-    quantile(dist[,x], prob = c(alpha/2, 1-alpha/2))
+    quantile(dist[,x], prob = c(alpha/2, 1-alpha/2), na.rm = T)
   }) |> 
     t()
   
