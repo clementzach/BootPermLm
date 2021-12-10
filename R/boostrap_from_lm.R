@@ -26,18 +26,12 @@
 #'
 #' @export
 bootstrap_from_lm <- function(input_lm, alpha = 0.05,  B = 1000) {
+ 
+  input_lm <- transform_lm_obj(input_lm)
+  y <- input_lm$y
   
-  if (!("model" %in% names(input_lm))){
-    stop("You must specify model = T when fitting your lm")
-  }
-  
-  y <- input_lm$model[,1]
-  
-  x <- input_lm$model[,-1]
-  if("(Intercept)" %in% names(input_lm$coefficients)){
-    x <- cbind("(Intercept)" = 1, x)
-  }
-  
+  x <- input_lm$x
+
   bootstrap_from_matrix(y, x, alpha = alpha, B = B)
   
 }

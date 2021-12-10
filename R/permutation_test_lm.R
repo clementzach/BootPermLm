@@ -26,16 +26,11 @@
 #' @export
 permutation_test_lm <- function(input_lm,  B = 1000) {
   
-  if (!("model" %in% names(input_lm))){
-    stop("You must specify model = T when fitting your lm")
-  }
+  input_lm <- transform_lm_obj(input_lm)
   
-  y <- input_lm$model[,1]
+  y <- input_lm$y
   
-  x <- input_lm$model[,-1]
-  if("(Intercept)" %in% names(input_lm$coefficients)){
-    x <- cbind("(Intercept)" = 1, x)
-  }
+  x <- input_lm$x
   
   permutation_test_matrix(y, x, B = B)
   
